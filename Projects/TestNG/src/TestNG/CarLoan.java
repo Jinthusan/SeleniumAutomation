@@ -1,5 +1,6 @@
 package TestNG;
 
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.Test;
 
 public class CarLoan {
@@ -11,12 +12,18 @@ public class CarLoan {
 	}
 	
 	@Test
+	public void LoginWebCarMotor()
+	{
+		System.out.println("CarSeleniumMotor");
+	}
+	
+	@Test(groups= {"Smoke"})
 	public void LoginMobileCar()
 	{
 		System.out.println("CarApium");
 	}
 	
-	@Test
+	@Test(dependsOnMethods={"LoginWebCar", "LoginWebCarMotor"})
 	public void LoginWebAPICar()
 	{
 		System.out.println("CarRestAssured");
