@@ -6,6 +6,7 @@
       <class name="MavenDemo.MavenJava.SeleniumTest"/>
       <class name="MavenDemo.MavenJava.APITest"/>
       <class name="MavenDemo.MavenJava.AppiumTest"/>
+      <class name="MavenDemo.MavenJava.ExtentReportTest"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
