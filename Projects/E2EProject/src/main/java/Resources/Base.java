@@ -1,9 +1,10 @@
-package FrameworkFromScratch.E2EProject;
+package Resources;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -14,28 +15,33 @@ public class Base {
 	
 	//This class is to invoke driver to the relevant browser
 	
-	public void initializeDriver() throws IOException {
+	public WebDriver driver;
+	
+	public WebDriver initializeDriver() throws IOException {
 		
 		Properties prop = new Properties();
-		FileInputStream fis = new FileInputStream("E:\\SLIIT\\QA Udemy\\Selenium\\Git_Selenium\\Projects\\E2EProject\\src\\main\\java\\FrameworkFromScratch\\E2EProject\\data.properties");
+		FileInputStream fis = new FileInputStream("E:\\SLIIT\\QA Udemy\\Selenium\\Git_Selenium\\Projects\\E2EProject\\src\\main\\java\\Resources\\data.properties");
 		prop.load(fis);
 		
 		String browserName = prop.getProperty("browser");
-		//System.out.println(browserName);
+		System.out.println(browserName);
 		
-		if(browserName == "Chrome") {
+		if(browserName.contains("Chrome")) {
 			System.setProperty("webdriver.chrome.driver", "E:\\SLIIT\\QA Udemy\\Selenium\\Softwares\\Driver\\chromedriver.exe");
-			WebDriver driver = new ChromeDriver();
+			driver = new ChromeDriver();
 		}
-		else if(browserName=="Firefox"){
+		else if(browserName.contains("Firefox")){
 			
 			System.setProperty("webdriver.gecko.driver", "E:\\SLIIT\\QA Udemy\\Selenium\\Softwares\\Driver\\geckodriver.exe");
-			WebDriver driver = new FirefoxDriver();
+			driver = new FirefoxDriver();
 		}
-		else if(browserName== "IE") {
+		else if(browserName.contains("IE")) {
 			System.setProperty("webdriver.ie.driver", "E:\\SLIIT\\QA Udemy\\Selenium\\Softwares\\Driver\\IEDriverServer.exe");
-			WebDriver driver=new InternetExplorerDriver();
+			driver= new InternetExplorerDriver();
 		}
+		
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		return driver;
 	}
 
 }
